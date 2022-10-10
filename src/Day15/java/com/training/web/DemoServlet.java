@@ -1,11 +1,12 @@
 package Day15.java.com.training.web;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.Servlet;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Servlet implementation class DemoServlet
@@ -48,32 +50,69 @@ public class DemoServlet extends HttpServlet {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			String url="jdbc:oracle:thin:@localhost:1521/orcl.iiht.tech";
 			String user="system";
-			String pass="system";
+			String pass="root";
 			String username= request.getParameter("uname");
 			String password= request.getParameter("pwd");
 			PrintWriter out =response.getWriter();
 			response.setContentType("text/html");
-			if(username.equals(user)&&password.equals(pass))
+			
+			Connection con =DriverManager.getConnection(url,user,pass);
+			System.out.println("Connection successful!");
+			String newuser=null;
+			String newpass=null;
+			Statement stmt4=  con.createStatement();
+			String query="select * from StAdmin";
+			ResultSet rs2=stmt4.executeQuery(query);
+			while(rs2.next())
 			{
-//				String email=config.getInitParameter("email");
-//				ServletContext context=config.getServletContext();
-//				String dname=context.getInitParameter("dname");
-				Connection con =DriverManager.getConnection(url,user,pass);
-				PreparedStatement stmt2=con.prepareStatement("Insert into UserHarsh values(?,?)");
-				stmt2.setString(1, username);
-				stmt2.setString(2, password);
-				stmt2.executeUpdate();
-				
-				out.println("<html><body>");
-				out.println("<h1>Login Successful!<br> Welcome "+msg+"</h1>");
-				out.println("</body></html>");
+				if(rs2.getString(1).equals(username)&& rs2.getString(2).equals(password))
+				{
+					newuser=rs2.getString(1);
+					newpass=rs2.getString(2);
+					break;
+				}
 			}
-			else
-			{
-				out.println("<html><body>");
-				out.println("<h1>Login Failed! </h1>");
-				out.println("</body></html>");
-			}
+			if(username.equals(newuser)&& password.equals(newpass))
+				{
+					out.println("<html><body>");
+					out.println("<h1>Login Successful!<br> Welcome "+msg+"</h1>");
+					out.println("</body></html>");
+				}
+				else
+				{
+					out.println("<html><body>");
+					out.println("<h1>Login Failed! </h1>");
+					out.println("</body></html>");
+				}
+			con.commit();
+//			if(username.equals(user)&& password.equals(pass))
+//			{
+//				out.println("<html><body>");
+//				out.println("<h1>Login Successful!<br> Welcome "+msg+"</h1>");
+//				out.println("</body></html>");
+//			}
+//			else
+//			{
+//				out.println("<html><body>");
+//				out.println("<h1>Login Failed! </h1>");
+//				out.println("</body></html>");
+//			}
+//			PreparedStatement stmt3=con.prepareStatement("Select * from StAdmin where username=? && password=?");
+//			stmt3.setString(1, username);
+//			stmt3.setString(2, password);
+//			ResultSet rs2=stmt3.executeQuery();
+//			while(rs2.next())
+//			{
+//				if(rs2.getString(1).equals(username)&& rs2.getString(2).equals(password))
+//					{
+//						out.println("<html><body>");
+//						out.println("<h1>Login Successful!<br> Welcome "+msg+"</h1>");
+//						out.println("</body></html>");
+//						break;
+//					}
+//				
+//			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
