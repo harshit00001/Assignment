@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   
+   
+   <bean id="employee" class="com.training.spring.Employee" autowire="byName">
+   <property name="empId" value="101"/>
+   <property name="firstName" value="Harshit"/>
+   <property name="lastName" value="Raj"/>
+   </bean>
+   <bean id="laptop" name="laptop" class="com.training.spring.Laptop">
+   <property name="brand" value="hp"/>
+   <property name="price" value="90000"/>
+   </bean>
+    </beans>
