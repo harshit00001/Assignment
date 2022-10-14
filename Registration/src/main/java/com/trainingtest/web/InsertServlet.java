@@ -76,8 +76,8 @@ public class InsertServlet extends HttpServlet {
 			p.close();
 			ls.add(new UserDetails(userName,password,Name,id,address,UserType));
 			request.setAttribute("UserType",UserType);
-			request.setAttribute("RegisteredUser",ls);
-			RequestDispatcher rd=request.getRequestDispatcher("Home2.jsp");
+			request.setAttribute("Registered",ls);
+			RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");
 			rd.forward(request, response);
 				
 			

@@ -13,7 +13,7 @@
 <%String userType =(String)request.getAttribute("UserType");
 out.println("The User Type is : "+userType);
 %>
-<c:forEach items="${RegisteredAdmin}" var="rDetail">
+<c:forEach items="${Registered}" var="rDetail">
 <p>${rDetail}</p>
 </c:forEach>
 

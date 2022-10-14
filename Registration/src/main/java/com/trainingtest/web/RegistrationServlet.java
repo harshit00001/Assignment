@@ -95,15 +95,15 @@ public class RegistrationServlet extends HttpServlet {
 					if(newType.equals("admin type")) 
 					{
 						request.setAttribute("UserType",newType);
-						request.setAttribute("RegisteredAdmin",ls);
+						request.setAttribute("Registered",ls);
 						RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");
 						rd.forward(request, response);
 					}
 					else if(newType.equals("normal type"))
 					{
 						request.setAttribute("UserType",newType);
-						request.setAttribute("RegisteredUser",ls2);
-						RequestDispatcher rd=request.getRequestDispatcher("Home2.jsp");
+						request.setAttribute("Registered",ls2);
+						RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");
 						rd.forward(request, response);
 					}
 				}
