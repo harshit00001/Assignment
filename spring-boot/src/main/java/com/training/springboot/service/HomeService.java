@@ -10,6 +10,7 @@ import com.training.springboot.repository.HomeRepository;
 
 
 
+
 @Service
 public class HomeService {
 	@Autowired
@@ -26,5 +27,21 @@ public class HomeService {
 		}
 		return valid;
 	}
+	public void save(Employee emp) {
+		repo.save(emp);
+	}
+	
+	public List<Employee> listUsers(){
+		return repo.findAll();
+	}
+	
+	public Employee getUser(int id) {
+		return repo.findById(id).get();
+	}
+	
+	public void deleteUser(int id) {
+		repo.deleteById(id);
+	}
+
 
 }

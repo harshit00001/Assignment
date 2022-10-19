@@ -8,8 +8,13 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Table(name="employee3")
+@Table(name="employee4")
 public class Employee {
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int empid;
@@ -24,6 +29,10 @@ public class Employee {
 		this.empid = empid;
 		this.empName = empName;
 		this.empSal = empSal;
+	}
+	@Override
+	public String toString() {
+		return "Employee [empid=" + empid + ", empName=" + empName + ", empSal=" + empSal + "]";
 	}
 
 	public int getEmpid() {
